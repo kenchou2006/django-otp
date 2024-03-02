@@ -19,7 +19,7 @@ def index(request):
         }
         return render(request, 'index.html', context)
     else:
-        return redirect('/login')
+        return redirect('/login/')
 
 def otp(request):
     user_groups = request.user.groups.all()
