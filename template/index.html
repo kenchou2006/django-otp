@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css/">
+    <title>Scouts Site</title>
+</head>
+
+<body>
+<div class="container" id="container">
+    <div class="form-container sign-in">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="brand-container">
+                <img src="/static/logo.png/"
+                     alt="Brand Logo">
+            </div>
+            <h1>敦化國中童軍團</h1>
+            {% if request.user.is_authenticated %}
+            <p>{{ Account }}，你好</p>
+            <br>
+            <div class="button-container">
+                <a href="/djangoadmin/"><button type="button">系統管理</button></a>
+                <a href="{% url 'logout' %}"><button type="button">會員登出</button></a>
+            </div>
+            <br>
+            <input type="button" value="顯示OTP" onclick="location.href='/otp/'">
+            {% else %}
+            {% endif %}
+        </form>
+    </div>
+</div>
+</body>
+</html>

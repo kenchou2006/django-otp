@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Info</title>
+</head>
+<body>
+{% if request.user.is_authenticated %}
+    <h1>System Information</h1>
+    <p>Host Name: {{host_name}}</p>
+    <p>Operating System: {{os_name}} {{os_version}}</p>
+    <p>Processor: {{processor}}</p>
+    <p>Current Directory: {{current_directory}}</p>
+    <p>Total RAM: {{total_ram}} bytes</p>
+    <p>Internal IPv4: {{internal_ipv4}}</p>
+    <p>Local Time: <span id="current-time"></span></p>
+
+{% else %}
+    <meta http-equiv="Refresh" content="0; url='/'" />
+{% endif %}
+
+<script>
+    function updateCurrentTime() {
+        var currentTime = new Date();
+
+        var currentHour = currentTime.getHours();
+        var currentMinute = currentTime.getMinutes();
+        var currentSecond = currentTime.getSeconds();
+
+        // 格式化为两位数
+        currentHour = currentHour < 10 ? '0' + currentHour : currentHour;
+        currentMinute = currentMinute < 10 ? '0' + currentMinute : currentMinute;
+        currentSecond = currentSecond < 10 ? '0' + currentSecond : currentSecond;
+
+        // 更新页面元素
+        document.getElementById('current-time').textContent = currentHour + ':' + currentMinute + ':' + currentSecond;
+    }
+
+    // 初始加载页面时执行一次更新
+    updateCurrentTime();
+
+    // 定期更新当前时间
+    setInterval(function() {
+        updateCurrentTime();
+    }, 1000);
+</script>
+</body>
+</html>
