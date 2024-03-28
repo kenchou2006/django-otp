@@ -1,1 +1,1 @@
-WarningSign: gunicorn thjhscouts.wsgi
+django-otp: gunicorn thjhscouts.wsgi
