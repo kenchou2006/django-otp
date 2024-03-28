@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-y-0zs#nxp^d1gh_=tlmiqmi#ryhj++#gwx!@0&tzc)g3#dh!%6'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -51,7 +51,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'thjhscouts.wsgi.application'
-
+'''
+#Supabase
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -62,6 +63,21 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'verceldb',
+        'USER': 'default',
+        'PASSWORD': 'bz3cG9yYWoZT',
+        'HOST': 'ep-flat-morning-a187xrgf-pooler.ap-southeast-1.aws.neon.tech',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        }
+    }
+}
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
