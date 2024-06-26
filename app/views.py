@@ -78,7 +78,7 @@ def registerView(request):
         else:
             user_info = User.objects.create_user(username=username, email=email, password=password)
             user_info.save()
-            return redirect('/login')
+            return redirect('/login/')
 
     return render(request, 'register.html', {'error_message': error_message})
 
