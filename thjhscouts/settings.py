@@ -8,7 +8,7 @@ load_dotenv()
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
