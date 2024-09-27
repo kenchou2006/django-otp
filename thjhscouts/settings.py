@@ -1,15 +1,16 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-y-0zs#nxp^d1gh_=tlmiqmi#ryhj++#gwx!@0&tzc)g3#dh!%6'
+load_dotenv()
+
+SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
-#SECURE_SSL_REDIRECT = False
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,7 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -51,33 +51,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'thjhscouts.wsgi.application'
-'''
-#Supabase
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.gnvwlovpzgcgshpnxfje',
-        'PASSWORD': 'dunhuascoutsaccount77298',
-        'HOST': 'aws-0-ap-northeast-1.pooler.supabase.com',
-        'PORT': '5432',
-    }
-}
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'verceldb',
-        'USER': 'default',
-        'PASSWORD': 'bz3cG9yYWoZT',
-        'HOST': 'ep-flat-morning-a187xrgf-pooler.ap-southeast-1.aws.neon.tech',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'verceldb'),
+        'USER': os.getenv('DB_USER', 'default'),
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': os.environ['DB_HOST'],
+        'PORT': os.getenv('DB_PORT', 5432),
         'OPTIONS': {
             'sslmode': 'require',
         }
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
