@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css/">
+
+    <title>Scouts 77298 Login</title>
+</head>
+
+<body>
+<div class="container" id="container">
+    <div class="form-container sign-in">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="brand-container">
+                <img src="/static/logo.png/"
+                     alt="Brand Logo">
+            </div>
+            <h1>敦化國中童軍團</h1>
+            {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+            {% endif %}
+            <br>
+            <input type="text" placeholder="帳號" name="username" required>
+            <input type="password" placeholder="密碼" name="password" required>
+            <br>
+            <button type="submit">登入</button>
+            <a href="{% url 'register' %}"><button type="button">註冊</button></a>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>

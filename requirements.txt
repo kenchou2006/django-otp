@@ -1,0 +1,8 @@
+Django
+pyotp
+pytz
+urllib3
+psutil
+psycopg2-binary
+gunicorn
+python-dotenv

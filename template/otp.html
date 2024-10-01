@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css/">
+    <title>OTP 驗證碼</title>
+
+    <!-- 將JavaScript代碼直接放在<head>中 -->
+    <script>
+        // 添加一個標誌以確保在0或30秒時僅生成一次提示消息
+        var expirationMessageGenerated = false;
+
+        function checkExpiration() {
+            var currentTime = new Date();
+            var seconds = currentTime.getSeconds();
+
+            // 檢查秒數是否為0或30且提示消息未生成
+            if ((seconds === 0 || seconds === 30) && !expirationMessageGenerated) {
+                // 顯示過期訊息
+                var expirationMessage = document.createElement("p");
+                expirationMessage.innerHTML = "驗證碼已過期，請刷新頁面";
+
+                // 找到適當的容器元素，這裡使用id為"expiration-message-container"的元素
+                var container = document.getElementById("expiration-message-container");
+
+                // 插入訊息元素在"返回選單"按鈕之前
+                container.insertBefore(expirationMessage, container.firstChild);
+
+                // 設置標誌為true，表示提示消息已生成
+                expirationMessageGenerated = true;
+            }
+        }
+
+        // 在頁面載入完成後設定定時器，每秒檢查一次
+        window.onload = function () {
+            setInterval(checkExpiration, 1000);
+        };
+    </script>
+
+</head>
+
+<body>
+<div class="container" id="container">
+    <div class="form-container sign-in">
+        <form method="post" action="{% url 'login' %}">
+            <div class="brand-container">
+                <img src="/static/logo.png/" alt="Brand Logo">
+            </div>
+            <h1>敦化國中童軍團</h1>
+            {% if user.is_authenticated %}
+            <p>{{ user.username }}，你好</p>
+
+            <div class="button-container">
+                <a href="/djangoadmin/"><button type="button">系統管理</button></a>
+                <a href="{% url 'logout' %}"><button type="button">會員登出</button></a>
+            </div>
+
+            <br>
+
+            {% for otp_data in otp_data_list %}
+            <p>{{ otp_data.account_name }} OTP: {{ otp_data.otp_value }}</p>
+            {% endfor %}
+            <br>
+            <div id="expiration-message-container"></div>
+
+            <input type="button" value="返回選單" onclick="location.href='/'">
+            {% else %}
+            {% endif %}
+        </form>
+    </div>
+
+
+</div>
+</body>
+
+</html>
