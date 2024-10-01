@@ -94,3 +94,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_SUPERUSER_USERNAME = os.getenv('DEFAULT_SUPERUSER_USERNAME', 'admin')
+DEFAULT_SUPERUSER_EMAIL = os.getenv('DEFAULT_SUPERUSER_EMAIL', 'admin@example.com')
+DEFAULT_SUPERUSER_PASSWORD = os.getenv('DEFAULT_SUPERUSER_PASSWORD', 'password')
