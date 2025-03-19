@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "thjhscouts/wsgi.py",
+      "src": "server/wsgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
     },
@@ -24,7 +24,7 @@
 
     {
       "src": "/(.*)",
-      "dest": "thjhscouts/wsgi.py"
+      "dest": "server/wsgi.py"
     }
   ]
 }

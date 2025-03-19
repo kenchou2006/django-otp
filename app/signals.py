@@ -17,10 +17,10 @@ def create_otp_group(sender, **kwargs):
 @receiver(post_migrate)
 def create_superuser(sender, **kwargs):
     User = get_user_model()
-    if not User.objects.filter(is_superuser=True).exists():
+    if not User.objects.filter(is_superuser=True).exists() and not settings.DEBUG:
         User.objects.create_superuser(
             username=settings.DEFAULT_SUPERUSER_USERNAME,
             email=settings.DEFAULT_SUPERUSER_EMAIL,
             password=settings.DEFAULT_SUPERUSER_PASSWORD
         )
-        print("Superuser 'admin' created successfully.")
+        print(f"Superuser '{settings.DEFAULT_SUPERUSER_USERNAME}' created successfully.")
